@@ -1,7 +1,7 @@
 {
     "mode": "sr",
     "use_cl": true,
-    "gpu_ids": [0],
+    "gpu_ids": [0, 1],
 
     "scale": 32,
     "is_train": true,
@@ -54,7 +54,7 @@
         "split_batch": 2,
         "save_ckp_step": 50,
         "save_vis_step": 1,
-        "pretrain": null,
+        "pretrain": "resume",
         "pretrained_path": "./experiments/SRFBN_in3f32_x4/epochs/last_ckp.pth",
         "cl_weights": [1.0, 1.0, 1.0, 1.0]
     }
