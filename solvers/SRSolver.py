@@ -43,6 +43,8 @@ class SRSolver(BaseSolver):
                 self.criterion_pix = nn.L1Loss()
             elif loss_type == 'l2':
                 self.criterion_pix = nn.MSELoss()
+            elif loss_type == 'KL':
+                self.criterion_pix = nn.KLDivLoss()
             else:
                 raise NotImplementedError('Loss type [%s] is not implemented!'%loss_type)
 
