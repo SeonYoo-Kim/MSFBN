@@ -33,11 +33,11 @@
 
     "networks": {
         "which_model": "SRFBN",
-        "num_features": 32,
+        "num_features": 64,
         "in_channels": 3,
         "out_channels": 3,
         "num_steps": 4,
-        "num_groups": 3
+        "num_groups": 6
     },
 
     "solver": {

@@ -3,7 +3,7 @@
     "use_cl": true,
     "gpu_ids": [0],
 
-    "scale": 32,
+    "scale": 16,
     "is_train": true,
     "use_chop": true,
     "rgb_range": 255,
@@ -17,8 +17,8 @@
             "dataroot_LR": "/mnt/data/paper99/DIV2K/Augment/DIV2K_train_LR_aug/x4",
             "data_type": "npy",
             "n_workers": 4,
-            "batch_size": 1,
-            "LR_size": 36,
+            "batch_size": 4,
+            "LR_size": 20,
             "use_flip": true,
             "use_rot": true,
             "noise": "."
@@ -33,11 +33,11 @@
 
     "networks": {
         "which_model": "SRFBN",
-        "num_features": 64,
+        "num_features": 32,
         "in_channels": 3,
         "out_channels": 3,
         "num_steps": 4,
-        "num_groups": 6
+        "num_groups": 3
     },
 
     "solver": {
@@ -47,14 +47,14 @@
         "lr_scheme": "MultiStepLR",
         "lr_steps": [200, 400, 600, 800],
         "lr_gamma": 0.5,
-        "loss_type": "KL",
+        "loss_type": "l1",
         "manual_seed": 0,
         "num_epochs": 1000,
         "skip_threshold": 3,
-        "split_batch": 2,
+        "split_batch": 1,
         "save_ckp_step": 50,
         "save_vis_step": 1,
-        "pretrain": "resume",
+        "pretrain": null,
         "pretrained_path": "./experiments/SRFBN_in3f32_x4/epochs/last_ckp.pth",
         "cl_weights": [1.0, 1.0, 1.0, 1.0]
     }
