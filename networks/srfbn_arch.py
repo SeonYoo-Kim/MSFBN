@@ -9,10 +9,6 @@ class FeedbackBlock(nn.Module):
             stride = 2
             padding = 2
             kernel_size = 6
-        elif upscale_factor == 3:
-            stride = 3
-            padding = 2
-            kernel_size = 7
         elif upscale_factor == 4:
             stride = 4
             padding = 2
@@ -21,6 +17,14 @@ class FeedbackBlock(nn.Module):
             stride = 8
             padding = 2
             kernel_size = 12
+        elif upscale_factor == 16:
+            stride = 16
+            padding = 2
+            kernel_size = 20
+        elif upscale_factor == 32:
+            stride = 32
+            padding = 2
+            kernel_size = 36
 
         self.num_groups = num_groups
 
@@ -102,10 +106,6 @@ class SRFBN(nn.Module):
             stride = 2
             padding = 2
             kernel_size = 6
-        elif upscale_factor == 3:
-            stride = 3
-            padding = 2
-            kernel_size = 7
         elif upscale_factor == 4:
             stride = 4
             padding = 2
@@ -114,6 +114,14 @@ class SRFBN(nn.Module):
             stride = 8
             padding = 2
             kernel_size = 12
+        elif upscale_factor == 16:
+            stride = 16
+            padding = 2
+            kernel_size = 20
+        elif upscale_factor == 32:
+            stride = 32
+            padding = 2
+            kernel_size = 36
 
         self.num_steps = num_steps
         self.num_features = num_features
