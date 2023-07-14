@@ -85,19 +85,23 @@ def main():
         ssim_list = []
         val_loss_list = []
 
-        for iter, batch in enumerate(val_loader):
-            solver.feed_data(batch)
-            iter_loss = solver.test()
-            val_loss_list.append(iter_loss)
+        for iter in enumerate(val_loader):
 
-            # calculate evaluation metrics
-            visuals = solver.get_current_visual()
-            psnr, ssim = util.calc_metrics(visuals['SR'], visuals['HR'], crop_border=scale)
-            psnr_list.append(psnr)
-            ssim_list.append(ssim)
+            for batch in enumerate(val_loader):
+                solver.feed_data(batch)
+                iter_loss = solver.test()
+                val_loss_list.append(iter_loss)
 
-            if opt["save_image"]:
-                solver.save_current_visual(epoch, iter)
+                # calculate evaluation metrics
+                visuals = solver.get_current_visual()
+                psnr, ssim = util.calc_metrics(visuals['SR'], visuals['HR'], crop_border=scale)
+                psnr_list.append(psnr)
+                ssim_list.append(ssim)
+
+                if opt["save_image"]:
+                    solver.save_current_visual(epoch, iter)
+
+
 
         solver_log['records']['val_loss'].append(sum(val_loss_list)/len(val_loss_list))
         solver_log['records']['psnr'].append(sum(psnr_list)/len(psnr_list))

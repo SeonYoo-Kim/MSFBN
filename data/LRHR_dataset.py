@@ -31,11 +31,12 @@ class LRHRDataset(data.Dataset):
 
         # read image list from image/binary files
         for N in range(5):
-            self.paths_HR[N] = common.get_image_paths(self.opt['data_type'], self.opt['dataroot_HR'][N])
-            self.paths_LR[N] = common.get_image_paths(self.opt['data_type'], self.opt['dataroot_LR'][N])
+            print(self.opt['dataroot_HR'][N]+"##############")
+            self.paths_HR.append = common.get_image_paths(self.opt['data_type'], self.opt['dataroot_HR'][N])
+            self.paths_LR.append = common.get_image_paths(self.opt['data_type'], self.opt['dataroot_LR'][N])
             #print(self.paths_HR)
             #print(self.paths_LR)
-
+        print(self.paths_HR)
         # self.paths_HR2 = common.get_image_paths(self.opt['data_type'], self.opt['dataroot_HR2'])
         # self.paths_LR2 = common.get_image_paths(self.opt['data_type'], self.opt['dataroot_LR2'])
         #
@@ -89,6 +90,7 @@ class LRHRDataset(data.Dataset):
             lr_tensor, hr_tensor = common.np2Tensor([lr[N], hr[N]], self.opt['rgb_range']) # 넘파이 파일을 텐서로 변환 / 정규화
 
         print(hr.size)
+        print("==================================")
 
         return {'LR': lr_tensor, 'HR': hr_tensor, 'LR_path': lr_path, 'HR_path': hr_path}
 

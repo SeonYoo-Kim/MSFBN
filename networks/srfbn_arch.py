@@ -22,9 +22,9 @@ class FeedbackBlock(nn.Module):
             padding = 2
             kernel_size = 20
         elif upscale_factor == 32:
-            stride = 32
+            stride = 2
             padding = 2
-            kernel_size = 36
+            kernel_size = 6
 
         self.num_groups = num_groups
 
@@ -119,9 +119,9 @@ class SRFBN(nn.Module):
             padding = 2
             kernel_size = 20
         elif upscale_factor == 32:
-            stride = 32
+            stride = 2
             padding = 2
-            kernel_size = 36
+            kernel_size = 6
 
         self.num_steps = num_steps
         self.num_features = num_features
