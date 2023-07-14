@@ -26,7 +26,7 @@ class LRDataset(data.Dataset):
     def __getitem__(self, idx):
         # get LR image
         lr, lr_path = self._load_file(idx)
-        lr_tensor = common.np2Tensor([lr], self.opt['rgb_range'])[0]
+        lr_tensor = common.np2Tensor([lr], self.opt['rgb_range'])[0] # 넘파이 파일을 텐서로 변환 / 정규화
         return {'LR': lr_tensor, 'LR_path': lr_path}
 
 

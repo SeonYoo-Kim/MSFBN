@@ -60,6 +60,8 @@ def weights_init_orthogonal(m):
         init.constant_(m.bias.data, 0.0)
 
 def init_weights(net, init_type='kaiming', scale=1, std=0.02):
+
+    
     # scale for 'kaiming', std for 'normal'.
     print('initialization method [%s]' % init_type)
     if init_type == 'normal':
@@ -68,7 +70,7 @@ def init_weights(net, init_type='kaiming', scale=1, std=0.02):
     elif init_type == 'kaiming':
         weights_init_kaiming_ = functools.partial(weights_init_kaiming, scale=scale)
         net.apply(weights_init_kaiming_)
-    elif init_type == 'orthogonal':
+    elif init_type == 'orthogonal': #직교? 독립?
         net.apply(weights_init_orthogonal)
     else:
         raise NotImplementedError('initialization method [%s] is not implemented' % init_type)

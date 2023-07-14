@@ -109,46 +109,47 @@ def np2Tensor(l, rgb_range):
     def _np2Tensor(img):
         # if img.shape[2] == 3: # for opencv imread
         #     img = img[:, :, [2, 1, 0]]
-        np_transpose = np.ascontiguousarray(img.transpose((2, 0, 1)))
-        tensor = torch.from_numpy(np_transpose).float()
-        tensor.mul_(rgb_range / 255.)
+        np_transpose = np.ascontiguousarray(img.transpose((2, 0, 1))) #채널축을 제일 앞으로 바꿈
+        tensor = torch.from_numpy(np_transpose).float() #넘파이를 파이토치로 바꿈
+        tensor.mul_(rgb_range / 255.) # 0~1 정규화
 
         return tensor
 
     return [_np2Tensor(_l) for _l in l]
 
 
-def get_patch(img_in, img_tar, patch_size, scale):
-    ih, iw = img_in.shape[:2]
-    oh, ow = img_tar.shape[:2]
+def get_patch(img_in, img_tar, patch_size, scale): #lr, hr, LR_size, self.scale 인풋
+    ih, iw = img_in.shape[:2] #인풋의 가로세로 (shape은 가로, 세로, 채널)
+    oh, ow = img_tar.shape[:2] #타겟의 가로세로
 
     ip = patch_size
 
-    if ih == oh:
-        tp = ip
-        ix = random.randrange(0, iw - ip + 1)
-        iy = random.randrange(0, ih - ip + 1)
+    if ih == oh: #인-아웃간 높이가 같으면
+        tp = ip #패치사이즈
+        ix = random.randrange(0, iw - ip + 1) # 0 ~ (인풋가로 - 패치크기 + 1) 사이의 랜덤값
+        iy = random.randrange(0, ih - ip + 1) # 0 ~ (인풋세로 - 패치크기 + 1) 사이의 랜덤값
         tx, ty = ix, iy
+
     else:
-        tp = ip * scale
+        tp = ip * scale #패치사이즈 * 스케일
         ix = random.randrange(0, iw - ip + 1)
         iy = random.randrange(0, ih - ip + 1)
         tx, ty = scale * ix, scale * iy
 
-    img_in = img_in[iy:iy + ip, ix:ix + ip, :]
-    img_tar = img_tar[ty:ty + tp, tx:tx + tp, :]
+    img_in = img_in[iy:iy + ip, ix:ix + ip, :] # 가로세로크기 : ip
+    img_tar = img_tar[ty:ty + tp, tx:tx + tp, :] # 가로세로크기 : tp
 
-    return img_in, img_tar
+    return img_in, img_tar # 각각 패치크기가 ip, tp인 인풋 아웃풋 이미지 리턴
 
 
-def add_noise(x, noise='.'):
-    if noise is not '.':
+def add_noise(x, noise='.'): # x = lr이미지, 디폴트는 .
+    if noise is not '.': #노이즈 없음
         noise_type = noise[0]
         noise_value = int(noise[1:])
-        if noise_type == 'G':
+        if noise_type == 'G': #가우시안 노이즈 추가
             noises = np.random.normal(scale=noise_value, size=x.shape)
             noises = noises.round()
-        elif noise_type == 'S':
+        elif noise_type == 'S': #포이즌 노이즈? 추가
             noises = np.random.poisson(x * noise_value) / noise_value
             noises = noises - noises.mean(axis=0).mean(axis=0)
 
@@ -159,7 +160,7 @@ def add_noise(x, noise='.'):
         return x
 
 
-def augment(img_list, hflip=True, rot=True):
+def augment(img_list, hflip=True, rot=True): #이미지 어그멘테이션
     # horizontal flip OR rotate
     hflip = hflip and random.random() < 0.5
     vflip = rot and random.random() < 0.5
@@ -174,7 +175,7 @@ def augment(img_list, hflip=True, rot=True):
     return [_augment(img) for img in img_list]
 
 
-def modcrop(img_in, scale):
+def modcrop(img_in, scale): #2채널 이미지 / 3채널 이미지를 
     img = np.copy(img_in)
     if img.ndim == 2:
         H, W = img.shape
