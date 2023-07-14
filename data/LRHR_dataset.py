@@ -97,7 +97,7 @@ class LRHRDataset(data.Dataset):
         print(lr_tensor3.size)
         print("=================##################=================")
 
-        return {'LR1': lr_tensor1, 'HR': hr_tensor1, 'LR_path1': lr_path1, 'HR_path1': hr_path1,
+        return {'LR1': lr_tensor1, 'HR1': hr_tensor1, 'HR': hr_tensor1, 'LR_path1': lr_path1, 'HR_path1': hr_path1,
                 'LR2': lr_tensor2, 'HR2': hr_tensor2, 'LR_path2': lr_path2, 'HR_path2': hr_path2,
                 'LR3': lr_tensor3, 'HR3': hr_tensor3, 'LR_path3': lr_path3, 'HR_path3': hr_path3,
                 'LR4': lr_tensor4, 'HR4': hr_tensor4, 'LR_path4': lr_path4, 'HR_path4': hr_path4,
