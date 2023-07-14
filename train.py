@@ -65,12 +65,48 @@ def main():
         train_loss_list = []
         with tqdm(total=len(train_loader), desc='Epoch: [%d/%d]'%(epoch, NUM_EPOCH), miniters=1) as t:
             for iter, batch in enumerate(train_loader):
-                solver.feed_data(batch)
-                iter_loss = solver.train_step()
-                batch_size = batch['LR'].size(0)
-                train_loss_list.append(iter_loss*batch_size)
-                t.set_postfix_str("Batch Loss: %.4f" % iter_loss)
-                t.update()
+                if (iter == 0) :
+                    solver.feed_data1(batch)
+                    iter_loss = solver.train_step()
+                    batch_size = batch['LR5'].size(0)
+                    batch['LR'] = batch['LR5']
+                    train_loss_list.append(iter_loss * batch_size)
+                    t.set_postfix_str("Batch Loss: %.4f" % iter_loss)
+                    t.update()
+                elif (iter == 1) :
+                    solver.feed_data2(batch)
+                    iter_loss = solver.train_step()
+                    batch_size = batch['LR4'].size(0)
+                    batch['LR'] = batch['LR4']
+                    train_loss_list.append(iter_loss * batch_size)
+                    t.set_postfix_str("Batch Loss: %.4f" % iter_loss)
+                    t.update()
+                elif (iter == 2) :
+                    solver.feed_data3(batch)
+                    iter_loss = solver.train_step()
+                    batch_size = batch['LR3'].size(0)
+                    batch['LR'] = batch['LR3']
+                    train_loss_list.append(iter_loss * batch_size)
+                    t.set_postfix_str("Batch Loss: %.4f" % iter_loss)
+                    t.update()
+                elif (iter == 3) :
+                    solver.feed_data4(batch)
+                    iter_loss = solver.train_step()
+                    batch_size = batch['LR2'].size(0)
+                    batch['LR'] = batch['LR2']
+                    train_loss_list.append(iter_loss * batch_size)
+                    t.set_postfix_str("Batch Loss: %.4f" % iter_loss)
+                    t.update()
+                elif (iter == 4) :
+                    solver.feed_data5(batch)
+                    iter_loss = solver.train_step()
+                    batch_size = batch['LR1'].size(0)
+                    batch['LR'] = batch['LR1']
+                    train_loss_list.append(iter_loss * batch_size)
+                    t.set_postfix_str("Batch Loss: %.4f" % iter_loss)
+                    t.update()
+
+
 
         solver_log['records']['train_loss'].append(sum(train_loss_list)/len(train_set))
         solver_log['records']['lr'].append(solver.get_current_learning_rate())
@@ -85,21 +121,20 @@ def main():
         ssim_list = []
         val_loss_list = []
 
-        for iter in enumerate(val_loader):
+        for iter, batch in enumerate(val_loader):
 
-            for batch in enumerate(val_loader):
-                solver.feed_data(batch)
-                iter_loss = solver.test()
-                val_loss_list.append(iter_loss)
+            solver.feed_data(batch)
+            iter_loss = solver.test()
+            val_loss_list.append(iter_loss)
 
-                # calculate evaluation metrics
-                visuals = solver.get_current_visual()
-                psnr, ssim = util.calc_metrics(visuals['SR'], visuals['HR'], crop_border=scale)
-                psnr_list.append(psnr)
-                ssim_list.append(ssim)
+            # calculate evaluation metrics
+            visuals = solver.get_current_visual()
+            psnr, ssim = util.calc_metrics(visuals['SR'], visuals['HR'], crop_border=scale)
+            psnr_list.append(psnr)
+            ssim_list.append(ssim)
 
-                if opt["save_image"]:
-                    solver.save_current_visual(epoch, iter)
+            if opt["save_image"]:
+                solver.save_current_visual(epoch, iter)
 
 
 

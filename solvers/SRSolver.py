@@ -82,8 +82,40 @@ class SRSolver(BaseSolver):
         init_weights(self.model, init_type)
 
 
-    def feed_data(self, batch, need_HR=True):
-        input = batch['LR']
+    def feed_data1(self, batch, need_HR=True):
+        input = batch['LR5']
+        self.LR.resize_(input.size()).copy_(input)
+
+        if need_HR:
+            target = batch['HR']
+            self.HR.resize_(target.size()).copy_(target)
+
+    def feed_data2(self, batch, need_HR=True):
+        input = batch['LR4']
+        self.LR.resize_(input.size()).copy_(input)
+
+        if need_HR:
+            target = batch['HR']
+            self.HR.resize_(target.size()).copy_(target)
+
+    def feed_data3(self, batch, need_HR=True):
+        input = batch['LR3']
+        self.LR.resize_(input.size()).copy_(input)
+
+        if need_HR:
+            target = batch['HR']
+            self.HR.resize_(target.size()).copy_(target)
+
+    def feed_data4(self, batch, need_HR=True):
+        input = batch['LR2']
+        self.LR.resize_(input.size()).copy_(input)
+
+        if need_HR:
+            target = batch['HR']
+            self.HR.resize_(target.size()).copy_(target)
+
+    def feed_data5(self, batch, need_HR=True):
+        input = batch['LR1']
         self.LR.resize_(input.size()).copy_(input)
 
         if need_HR:
