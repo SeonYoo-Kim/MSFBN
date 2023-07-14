@@ -9,9 +9,7 @@ class LRHRDataset(data.Dataset):
     '''
 
     def name(self):
-        return
-        #return common.find_benchmark(self.opt['dataroot_LR'])
-
+        return common.find_benchmark(self.opt['dataroot_LR1'])
 
     def __init__(self, opt):
         super(LRHRDataset, self).__init__()
@@ -81,20 +79,20 @@ class LRHRDataset(data.Dataset):
     def __getitem__(self, idx):
 
         lr1, hr1, lr_path1, hr_path1, lr2, hr2, lr_path2, hr_path2, lr3, hr3, lr_path3, hr_path3, lr4, hr4, lr_path4, hr_path4, lr5, hr5, lr_path5, hr_path5 = self._load_file(idx)
-        if self.train:
-            lr1, hr1 = self._get_patch(lr1, hr1)
-            lr2, hr2 = self._get_patch(lr2, hr2)
-            lr3, hr3 = self._get_patch(lr3, hr3)
-            lr4, hr4 = self._get_patch(lr4, hr4)
-            lr5, hr5 = self._get_patch(lr5, hr5)
+        # if self.train:
+        #     lr1, hr1 = self._get_patch(lr1, hr1)
+        #     lr2, hr2 = self._get_patch(lr2, hr2)
+        #     lr3, hr3 = self._get_patch(lr3, hr3)
+        #     lr4, hr4 = self._get_patch(lr4, hr4)
+        #     lr5, hr5 = self._get_patch(lr5, hr5)
         lr_tensor1, hr_tensor1 = common.np2Tensor([lr1, hr1], self.opt['rgb_range']) # 넘파이 파일을 텐서로 변환 / 정규화
         lr_tensor2, hr_tensor2 = common.np2Tensor([lr2, hr2], self.opt['rgb_range'])
         lr_tensor3, hr_tensor3 = common.np2Tensor([lr3, hr3], self.opt['rgb_range'])
         lr_tensor4, hr_tensor4 = common.np2Tensor([lr4, hr4], self.opt['rgb_range'])
         lr_tensor5, hr_tensor5 = common.np2Tensor([lr5, hr5], self.opt['rgb_range'])
 
-        print(hr_tensor1.size)
-        print(lr_tensor3.size)
+        #print(hr_tensor1.size)
+        #print(lr_tensor3.size)
         print("=================##################=================")
 
         return {'LR1': lr_tensor1, 'HR1': hr_tensor1, 'HR': hr_tensor1, 'LR_path1': lr_path1, 'HR_path1': hr_path1,

@@ -20,14 +20,14 @@
             "dataroot_LR2": "C:/Users/tjdn9/Documents/SuperResolution/DIV2K_train/LR/x4",
             "dataroot_HR3": "C:/Users/tjdn9/Documents/SuperResolution/DIV2K_train/HR/x4",
             "dataroot_LR3": "C:/Users/tjdn9/Documents/SuperResolution/DIV2K_train/LR/x8",
-            "dataroot_HR4": "C:/Users/tjdn9/Documents/SuperResolution/DIV2K_train/HR/x8",
-            "dataroot_LR4": "C:/Users/tjdn9/Documents/SuperResolution/DIV2K_train/LR/x16",
-            "dataroot_HR5": "C:/Users/tjdn9/Documents/SuperResolution/DIV2K_train/HR/x16",
-            "dataroot_LR5": "C:/Users/tjdn9/Documents/SuperResolution/DIV2K_train/LR/x32",
+//            "dataroot_HR4": "C:/Users/tjdn9/Documents/SuperResolution/DIV2K_train/HR/x8",
+//            "dataroot_LR4": "C:/Users/tjdn9/Documents/SuperResolution/DIV2K_train/LR/x16",
+//            "dataroot_HR5": "C:/Users/tjdn9/Documents/SuperResolution/DIV2K_train/HR/x16",
+//            "dataroot_LR5": "C:/Users/tjdn9/Documents/SuperResolution/DIV2K_train/LR/x32",
             "data_type": "npy",
-            "num_steps": 5,
+            "num_steps": 3,
             "n_workers": 4,
-            "batch_size": 1,
+            "batch_size": 2,
             "LR_size": 60,
             "use_flip": true,
             "use_rot": true,
@@ -41,21 +41,21 @@
             "dataroot_LR2": "C:/Users/tjdn9/Documents/SuperResolution/DIV2K_valid/LR/x4",
             "dataroot_HR3": "C:/Users/tjdn9/Documents/SuperResolution/DIV2K_valid/HR/x4",
             "dataroot_LR3": "C:/Users/tjdn9/Documents/SuperResolution/DIV2K_valid/LR/x8",
-            "dataroot_HR4": "C:/Users/tjdn9/Documents/SuperResolution/DIV2K_valid/HR/x8",
-            "dataroot_LR4": "C:/Users/tjdn9/Documents/SuperResolution/DIV2K_valid/LR/x16",
-            "dataroot_HR5": "C:/Users/tjdn9/Documents/SuperResolution/DIV2K_valid/HR/x16",
-            "dataroot_LR5": "C:/Users/tjdn9/Documents/SuperResolution/DIV2K_valid/LR/x32",
+//            "dataroot_HR4": "C:/Users/tjdn9/Documents/SuperResolution/DIV2K_valid/HR/x8",
+//            "dataroot_LR4": "C:/Users/tjdn9/Documents/SuperResolution/DIV2K_valid/LR/x16",
+//            "dataroot_HR5": "C:/Users/tjdn9/Documents/SuperResolution/DIV2K_valid/HR/x16",
+//            "dataroot_LR5": "C:/Users/tjdn9/Documents/SuperResolution/DIV2K_valid/LR/x32",
             "data_type": "img"
         }
     },
 
     "networks": {
         "which_model": "SRFBN",
-        "num_features": 64,
+        "num_features": 32,
         "in_channels": 3,
         "out_channels": 3,
-        "num_steps": 5,
-        "num_groups": 6
+        "num_steps": 3,
+        "num_groups": 3
     },
 
     "solver": {
@@ -69,11 +69,11 @@
         "manual_seed": 0,
         "num_epochs": 1000,
         "skip_threshold": 3,
-        "split_batch": 2,
+        "split_batch": 1,
         "save_ckp_step": 50,
         "save_vis_step": 1,
         "pretrain": null,
         "pretrained_path": "./experiments/SRFBN_in3f32_x4/epochs/last_ckp.pth",
-        "cl_weights": [1.0, 1.0, 1.0, 1.0, 1.0]
+        "cl_weights": [1.0, 1.0, 1.0]
     }
 }
