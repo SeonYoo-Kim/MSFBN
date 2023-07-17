@@ -10,3 +10,4 @@ __pycache__/
 
 experiments/
 
+/options/train/train_MSFBNx32.json
