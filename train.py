@@ -123,23 +123,23 @@ def main():
 
         for iter, batch in enumerate(val_loader):
 
-            if (iter == 0) :
+            if (iter % 5 == 0) :
                 solver.feed_data1(batch)
                 iter_loss = solver.test()
                 val_loss_list.append(iter_loss)
-            elif (iter == 1) :
+            elif (iter % 5 == 1) :
                 solver.feed_data2(batch)
                 iter_loss = solver.test()
                 val_loss_list.append(iter_loss)
-            elif (iter == 2) :
+            elif (iter % 5 == 2) :
                 solver.feed_data3(batch)
                 iter_loss = solver.test()
                 val_loss_list.append(iter_loss)
-            if (iter == 3) :
+            if (iter % 5 == 3) :
                 solver.feed_data4(batch)
                 iter_loss = solver.test()
                 val_loss_list.append(iter_loss)
-            if (iter == 4) :
+            if (iter % 5 == 4) :
                 solver.feed_data5(batch)
                 iter_loss = solver.test()
                 val_loss_list.append(iter_loss)
