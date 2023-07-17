@@ -135,11 +135,11 @@ def main():
                 solver.feed_data3(batch)
                 iter_loss = solver.test()
                 val_loss_list.append(iter_loss)
-            if (iter % 5 == 3) :
+            elif (iter % 5 == 3) :
                 solver.feed_data4(batch)
                 iter_loss = solver.test()
                 val_loss_list.append(iter_loss)
-            if (iter % 5 == 4) :
+            elif (iter % 5 == 4) :
                 solver.feed_data5(batch)
                 iter_loss = solver.test()
                 val_loss_list.append(iter_loss)

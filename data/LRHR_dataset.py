@@ -79,16 +79,16 @@ class LRHRDataset(data.Dataset):
         #     lr3, hr = self._get_patch(lr3, hr)
         #     lr4, hr = self._get_patch(lr4, hr)
         #     lr5, hr = self._get_patch(lr5, hr)
-        hr_tensor = common.np2Tensor([hr], self.opt['rgb_range'])
-        lr_tensor1 = common.np2Tensor([lr1], self.opt['rgb_range']) # 넘파이 파일을 텐서로 변환 / 정규화
-        lr_tensor2 = common.np2Tensor([lr2], self.opt['rgb_range'])
-        lr_tensor3 = common.np2Tensor([lr3], self.opt['rgb_range'])
-        lr_tensor4 = common.np2Tensor([lr4], self.opt['rgb_range'])
-        lr_tensor5 = common.np2Tensor([lr5], self.opt['rgb_range'])
+        hr_tensor, lr_tensor1, lr_tensor2, lr_tensor3, lr_tensor4, lr_tensor5 = common.np2Tensor([hr, lr1, lr2, lr3, lr4, lr5], self.opt['rgb_range'])
+        # lr_tensor1 = common.np2Tensor([lr1], self.opt['rgb_range']) # 넘파이 파일을 텐서로 변환 / 정규화
+        # lr_tensor2 = common.np2Tensor([lr2], self.opt['rgb_range'])
+        # lr_tensor3 = common.np2Tensor([lr3], self.opt['rgb_range'])
+        # lr_tensor4 = common.np2Tensor([lr4], self.opt['rgb_range'])
+        # lr_tensor5 = common.np2Tensor([lr5], self.opt['rgb_range'])
 
         #print(hr_tensor1.size)
         #print(lr_tensor3.size)
-        print("=================##################=================")
+        #print("=================##################=================")
 
         return { 'HR': hr_tensor,
                 'LR1': lr_tensor1, 'LR_path1': lr_path1,
