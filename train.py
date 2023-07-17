@@ -65,7 +65,7 @@ def main():
         train_loss_list = []
         with tqdm(total=len(train_loader), desc='Epoch: [%d/%d]'%(epoch, NUM_EPOCH), miniters=1) as t:
             for iter, batch in enumerate(train_loader):
-                if (iter == 0) :
+                if (iter % 5 == 0) :
                     solver.feed_data1(batch)
                     iter_loss = solver.train_step()
                     batch_size = batch['LR5'].size(0)
@@ -73,7 +73,7 @@ def main():
                     train_loss_list.append(iter_loss * batch_size)
                     t.set_postfix_str("Batch Loss: %.4f" % iter_loss)
                     t.update()
-                elif (iter == 1) :
+                elif (iter % 5 == 1) :
                     solver.feed_data2(batch)
                     iter_loss = solver.train_step()
                     batch_size = batch['LR4'].size(0)
@@ -81,7 +81,7 @@ def main():
                     train_loss_list.append(iter_loss * batch_size)
                     t.set_postfix_str("Batch Loss: %.4f" % iter_loss)
                     t.update()
-                elif (iter == 2) :
+                elif (iter % 5 == 2) :
                     solver.feed_data3(batch)
                     iter_loss = solver.train_step()
                     batch_size = batch['LR3'].size(0)
@@ -89,7 +89,7 @@ def main():
                     train_loss_list.append(iter_loss * batch_size)
                     t.set_postfix_str("Batch Loss: %.4f" % iter_loss)
                     t.update()
-                elif (iter == 3) :
+                elif (iter % 5 == 3) :
                     solver.feed_data4(batch)
                     iter_loss = solver.train_step()
                     batch_size = batch['LR2'].size(0)
@@ -97,7 +97,7 @@ def main():
                     train_loss_list.append(iter_loss * batch_size)
                     t.set_postfix_str("Batch Loss: %.4f" % iter_loss)
                     t.update()
-                elif (iter == 4) :
+                elif (iter % 5 == 4) :
                     solver.feed_data5(batch)
                     iter_loss = solver.train_step()
                     batch_size = batch['LR1'].size(0)
