@@ -89,22 +89,22 @@ def main():
                     train_loss_list.append(iter_loss * batch_size)
                     t.set_postfix_str("Batch Loss: %.4f" % iter_loss)
                     t.update()
-                # elif (iter == 3) :
-                #     solver.feed_data4(batch)
-                #     iter_loss = solver.train_step()
-                #     batch_size = batch['LR2'].size(0)
-                #     batch['LR'] = batch['LR2']
-                #     train_loss_list.append(iter_loss * batch_size)
-                #     t.set_postfix_str("Batch Loss: %.4f" % iter_loss)
-                #     t.update()
-                # elif (iter == 4) :
-                #     solver.feed_data5(batch)
-                #     iter_loss = solver.train_step()
-                #     batch_size = batch['LR1'].size(0)
-                #     batch['LR'] = batch['LR1']
-                #     train_loss_list.append(iter_loss * batch_size)
-                #     t.set_postfix_str("Batch Loss: %.4f" % iter_loss)
-                #     t.update()
+                elif (iter == 3) :
+                    solver.feed_data4(batch)
+                    iter_loss = solver.train_step()
+                    batch_size = batch['LR2'].size(0)
+                    batch['LR'] = batch['LR2']
+                    train_loss_list.append(iter_loss * batch_size)
+                    t.set_postfix_str("Batch Loss: %.4f" % iter_loss)
+                    t.update()
+                elif (iter == 4) :
+                    solver.feed_data5(batch)
+                    iter_loss = solver.train_step()
+                    batch_size = batch['LR1'].size(0)
+                    batch['LR'] = batch['LR1']
+                    train_loss_list.append(iter_loss * batch_size)
+                    t.set_postfix_str("Batch Loss: %.4f" % iter_loss)
+                    t.update()
 
 
 
@@ -135,14 +135,14 @@ def main():
                 solver.feed_data3(batch)
                 iter_loss = solver.test()
                 val_loss_list.append(iter_loss)
-            # if (iter == 3) :
-            #     solver.feed_data4(batch)
-            #     iter_loss = solver.test()
-            #     val_loss_list.append(iter_loss)
-            # if (iter == 4) :
-            #     solver.feed_data5(batch)
-            #     iter_loss = solver.test()
-            #     val_loss_list.append(iter_loss)
+            if (iter == 3) :
+                solver.feed_data4(batch)
+                iter_loss = solver.test()
+                val_loss_list.append(iter_loss)
+            if (iter == 4) :
+                solver.feed_data5(batch)
+                iter_loss = solver.test()
+                val_loss_list.append(iter_loss)
 
             # calculate evaluation metrics
             visuals = solver.get_current_visual()
